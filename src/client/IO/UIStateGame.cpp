@@ -259,6 +259,13 @@ namespace jrc
                 case KeyAction::PARTY:
                     emplace<UIParty>();
                     break;
+                case KeyAction::MAINMENU:
+                    // Temporary: Open key config as system menu placeholder
+                    emplace<UIKeyConfig>(
+                        Stage::get().get_player().get_inventory(),
+                        Stage::get().get_player().get_skills()
+                    );
+                    break;
                 default:
                     break;
                 }
