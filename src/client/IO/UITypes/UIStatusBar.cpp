@@ -169,6 +169,9 @@ namespace jrc
         case BT_SKILL:
             UI::get().send_menu(KeyAction::SKILLBOOK);
             return Button::NORMAL;
+        case BT_OPTIONS:
+            UI::get().send_menu(KeyAction::MAINMENU);
+            return Button::NORMAL;
         default:
             return Button::PRESSED;
         }
