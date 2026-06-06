@@ -3,3 +3,24 @@
 /assets/
 /serverAssets/
 __pycache__
+
+# System files
+.DS_Store
+
+# AI agent files
+AGENTS.md
+
+# Backup and debug files
+*.backup
+*_debug.cpp
+
+# Log files
+*.log
+
+# Data directories
+logs/
+nxFiles/
+wz/
+
+# Generated files
+*.nx
