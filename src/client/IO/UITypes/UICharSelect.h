@@ -51,6 +51,7 @@ namespace jrc
         void clear_pending_pic_request();
 
         const CharEntry& get_character(int32_t cid);
+        int32_t get_selected_character_id() const;
 
     private:
         enum class PicAction

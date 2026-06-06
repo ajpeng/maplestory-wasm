@@ -61,4 +61,11 @@ namespace jrc
     {
         void handle(InPacket& recv) const override;
     };
+
+    // Simple handler for enter game packet (opcode 28)
+    class EnterGameHandler : public PacketHandler
+    {
+    public:
+        void handle(InPacket& recv) const override;
+    };
 }

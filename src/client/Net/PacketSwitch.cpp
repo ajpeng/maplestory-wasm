@@ -51,6 +51,7 @@ namespace jrc
         // Login 2
         SELECT_WORLD       = 26,
         RECOMMENDED_WORLDS = 27,
+        ENTER_GAME         = 28,
 
         // Inventory 1
         MODIFY_INVENTORY = 29,
@@ -166,6 +167,7 @@ namespace jrc
         emplace<ADD_NEWCHAR_ENTRY, AddNewCharEntryHandler>();
         emplace<DELCHAR_RESPONSE, DeleteCharResponseHandler>();
         emplace<SERVER_IP, ServerIPHandler>();
+        emplace<ENTER_GAME, EnterGameHandler>();
 
         // 'Setfield' handlers
         emplace<SET_FIELD, SetfieldHandler>();

@@ -21,6 +21,7 @@
 
 #include "../Session.h"
 #include "../Packets/LoginPackets.h"
+#include "../Packets/SelectCharPackets.h"
 
 #include "../../Configuration.h"
 #include "../../IO/UI.h"
@@ -246,6 +247,7 @@ namespace jrc
 
     void ServerIPHandler::handle(InPacket& recv) const
     {
+        Console::get().print("[ServerIPHandler] Received server IP packet, length: " + std::to_string(recv.length()));
         recv.skip(2);
 
         if (auto charselect = UI::get().get_element<UICharSelect>())
@@ -271,5 +273,27 @@ namespace jrc
         // Attempt to reconnect to the server and if successfull, login to the game.
         Session::get().reconnect(addrstr.c_str(), portstr.c_str());
         PlayerLoginPacket(cid).dispatch();
+    }
+
+    void EnterGameHandler::handle(InPacket& recv) const
+    {
+        Console::get().print("[EnterGameHandler] Packet length: " + std::to_string(recv.length()));
+        Console::get().print("[EnterGameHandler] Character selection acknowledged, sending SelectCharPacket");
+        
+        // Get the selected character ID and send SelectCharPacket
+        auto charselect = UI::get().get_element<UICharSelect>();
+        if (charselect) {
+            int32_t selected_cid = charselect->get_selected_character_id();
+            Console::get().print("[EnterGameHandler] Selected character ID: " + std::to_string(selected_cid));
+            
+            if (selected_cid != -1) {
+                Console::get().print("[EnterGameHandler] Sending SelectCharPacket with character ID: " + std::to_string(selected_cid));
+                SelectCharPacket(selected_cid).dispatch();
+            } else {
+                Console::get().print("[EnterGameHandler] Error: No valid character selected");
+            }
+        } else {
+            Console::get().print("[EnterGameHandler] Error: UICharSelect not found");
+        }
     }
 }

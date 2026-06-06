@@ -578,4 +578,12 @@ namespace jrc
         int16_t y = 250 + (200 * (i > 3));
         return { x, y };
     }
+
+    int32_t UICharSelect::get_selected_character_id() const
+    {
+        if (selected_absolute < characters.size()) {
+            return characters[selected_absolute].cid;
+        }
+        return -1; // No character selected or invalid index
+    }
 }
